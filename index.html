@@ -1,37 +1,149 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Setup: Firefox & Cookies</title>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Master Setup • Firefox & Cookies</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #f0f2f5; text-align: center; }
-        .box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .btn { display: block; width: 100%; padding: 15px; margin: 15px 0; font-size: 16px; border-radius: 10px; text-decoration: none; font-weight: bold; }
-        .install { background: #007bff; color: white; }
-        .addon { background: #28a745; color: white; }
-        .login { background: #dc3545; color: white; }
-        .tips-box { margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 5px solid #ffc107; text-align: left; font-size: 14px; }
+        /* Modern CSS Reset & Fonts */
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Container Aestetik (Glassmorphism effect) */
+        .box { 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px);
+            padding: 40px 30px; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            width: 100%;
+            max-width: 420px; 
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+        .box:hover { transform: translateY(-5px); }
+
+        /* Judul & Deskripsi */
+        h2 { 
+            font-size: 28px; 
+            font-weight: 800; 
+            margin-bottom: 10px; 
+            color: #2c3e50;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: #7f8c8d;
+            margin-bottom: 35px;
+            line-height: 1.4;
+        }
+
+        /* Tombol Simetris & Modern */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; 
+        }
+        .btn { 
+            display: block; 
+            width: 100%; 
+            padding: 18px; 
+            font-size: 16px; 
+            border-radius: 15px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            transition: all 0.3s ease; 
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Warna Tombol yang Halus */
+        .install { background-color: #3498db; color: white; }
+        .install:hover { background-color: #2980b9; box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3); }
+
+        .addon { background-color: #2ecc71; color: white; }
+        .addon:hover { background-color: #27ae60; box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3); }
+
+        .login { background-color: #e74c3c; color: white; }
+        .login:hover { background-color: #c0392b; box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3); }
+
+        /* Tips Box Simetris */
+        .tips-box { 
+            margin-top: 35px; 
+            padding: 20px; 
+            background-color: #fffaf0; 
+            border-radius: 15px; 
+            border: 1px solid #ffe0b2;
+            text-align: left; 
+        }
+        .tips-title {
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        .tips-list { 
+            padding-left: 18px; 
+            font-size: 14px; 
+            color: #5d6d7e;
+            line-height: 1.6;
+        }
+        .tips-list li { margin-bottom: 6px; }
+        .tips-list li b { color: #34495e; }
+
+        /* Footer */
+        .footer {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #bdc3c7;
+        }
     </style>
 </head>
 <body>
     <div class="box">
         <h2>🛠 Master Setup</h2>
-        <a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox" class="btn install">1. Instal Firefox</a>
+        <p class="subtitle">Panduan automasi setup Firefox Android <br> khusus pengguna 1DM/Chrome.</p>
         
-        <a href="intent:https://addons.mozilla.org/en-US/android/addon/cookies-txt/#Intent;action=android.intent.action.VIEW;package=org.mozilla.firefox;end" class="btn addon">2. Instal Ekstensi cookies.txt</a>
-        
-        <a href="intent:https://accounts.google.com/ServiceLogin?service=youtube&continue=https://m.youtube.com#Intent;action=android.intent.action.VIEW;package=org.mozilla.firefox;end" class="btn login">3. Login & Export</a>
+        <div class="btn-container">
+            <a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox" class="btn install">1. Instal Firefox</a>
+            
+            <a href="intent://addons.mozilla.org/en-US/android/addon/cookies-txt/#Intent;scheme=https;package=org.mozilla.firefox;end" class="btn addon">2. Instal Ekstensi cookies.txt</a>
+            
+            <a href="intent://accounts.google.com/ServiceLogin?service=youtube&continue=https://m.youtube.com#Intent;scheme=https;package=org.mozilla.firefox;end" class="btn login">3. Login & Export YouTube</a>
+        </div>
 
         <div class="tips-box">
-            <strong>Tips:</strong>
-            <ul style="padding-left: 20px;">
-                <li>Pilih Cancel Jika Minta Buka App YouTube.</li>
-                <li>Setelah Login di Firefox: Klik Titik Tiga.</li>
-                <li>Ekstensi: Klik Export cookies.</li>
-                <li>Export: Klik Copy di Current Site.</li>
-                <li>Setelah Copy, Tempelkan teks tersebut ke textarea input cookies di NCC Clipper Studio.</li>
+            <div class="tips-title">
+                <span>💡</span> Tips Penggunaan Penting
+            </div>
+            <ul class="tips-list">
+                <li>Jika muncul pop-up buka aplikasi YouTube, pilih <b>Cancel</b> / <b>Batal</b>.</li>
+                <li>Setelah Login di Firefox, klik <b>Titik Tiga</b> (Menu).</li>
+                <li>Pilih <b>Ekstensi</b> > Klik <b>Export cookies</b>.</li>
+                <li>Klik <b>Copy</b> pada bagian <i>Current Site</i>.</li>
+                <li>Tempelkan (Paste) hasilnya ke input NCC Clipper Studio.</li>
             </ul>
         </div>
+        
+        <div class="footer">Created by PALUGADA</div>
     </div>
 </body>
 </html>
