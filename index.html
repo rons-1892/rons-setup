@@ -1,54 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Thumbnail Converter</title>
-    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+    <title>Master Setup: Firefox & Cookies</title>
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #121212; color: white; margin: 0; }
-        .container { background: #1e1e1e; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        input { margin-bottom: 20px; width: 100%; }
-        button { background: #ff3e3e; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-size: 16px; font-weight: bold; cursor: pointer; }
-        #status { margin-top: 20px; font-size: 14px; color: #aaa; }
-        .download-btn { display: none; background: #00c853; margin-top: 20px; text-decoration: none; padding: 15px; border-radius: 12px; display: block; color: white; font-weight: bold; }
+        body { font-family: sans-serif; padding: 20px; background: #f0f2f5; text-align: center; }
+        .box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn { display: block; width: 100%; padding: 15px; margin: 15px 0; font-size: 16px; border-radius: 10px; text-decoration: none; font-weight: bold; }
+        .install { background: #007bff; color: white; }
+        .addon { background: #28a745; color: white; }
+        .login { background: #dc3545; color: white; }
+        .tips-box { margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 5px solid #ffc107; text-align: left; font-size: 14px; }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>Video Converter Pro</h2>
-    <input type="file" id="upload" accept="video/mp4">
-    <button id="btnConvert" onclick="processVideo()">Convert Video</button>
-    <p id="status">Pilih video, lalu klik Convert</p>
-    <a id="downloadLink" class="download-btn" style="display:none;">Download Video Hasil</a>
-</div>
-<script>
-    const { createFFmpeg, fetchFile } = FFmpeg;
-    const ffmpeg = createFFmpeg({ log: true });
-    async function processVideo() {
-        const fileInput = document.getElementById('upload');
-        const status = document.getElementById('status');
-        const btn = document.getElementById('btnConvert');
-        if (!fileInput.files[0]) return alert("Pilih video!");
-        btn.disabled = true;
-        status.innerText = "Memuat... (Tunggu sebentar)";
-        try {
-            if (!ffmpeg.isLoaded()) await ffmpeg.load();
-            const file = fileInput.files[0];
-            ffmpeg.FS('writeFile', 'input.mp4', await fetchFile(file));
-            status.innerText = "Mengambil thumbnail...";
-            await ffmpeg.run('-ss', '00:00:01', '-i', 'input.mp4', '-vframes', '1', 'thumb.jpg');
-            status.innerText = "Menggabungkan ke video...";
-            await ffmpeg.run('-i', 'input.mp4', '-i', 'thumb.jpg', '-filter_complex', '[0:v][1:v]overlay=0:0:enable=\'between(t,0,0.2)\'', '-c:a', 'copy', 'output.mp4');
-            const data = ffmpeg.FS('readFile', 'output.mp4');
-            const url = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
-            const dl = document.getElementById('downloadLink');
-            dl.href = url;
-            dl.download = 'SIAP_UPLOAD_' + file.name;
-            dl.style.display = 'block';
-            status.innerText = "Selesai!";
-        } catch (e) { status.innerText = "Error: " + e.message; } finally { btn.disabled = false; }
-    }
-</script>
+    <div class="box">
+        <h2>🛠 Master Setup</h2>
+        <a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox" class="btn install">1. Instal Firefox</a>
+        <a href="intent://addons.mozilla.org/en-US/android/addon/cookies-txt/#Intent;scheme=https;package=org.mozilla.firefox;end" class="btn addon">2. Instal Ekstensi cookies.txt</a>
+        <a href="intent://accounts.google.com/ServiceLogin?service=youtube&continue=https://m.youtube.com#Intent;scheme=https;package=org.mozilla.firefox;end" class="btn login">3. Login & Export</a>
+
+        <div class="tips-box">
+            <strong>Tips:</strong>
+            <ul style="padding-left: 20px;">
+                <li>Pilih Cancel Jika Minta Buka App YouTube.</li>
+                <li>Setelah Login di Firefox: Klik Titik Tiga.</li>
+                <li>Ekstensi: Klik Export cookies.</li>
+                <li>Export: Klik Copy di Current Site.</li>
+                <li>Setelah Copy, Tempelkan teks tersebut ke textarea input cookies di NCC Clipper Studio.</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
+HTML
