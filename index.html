@@ -1,133 +1,54 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Master Setup • Firefox & Cookies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Thumbnail Converter</title>
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
     <style>
-        /* Reset & Base Style (Tema Terang Bersih) */
-        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            background-color: #f0f2f5; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            padding: 16px;
-            color: #333333;
-        }
-
-        /* Container Box - Simetris Kanan-Kiri & Center */
-        .box { 
-            background-color: #ffffff; 
-            padding: 30px 20px; 
-            border-radius: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
-            width: 100%;
-            max-width: 400px; 
-            text-align: center;
-            border: 1px solid #e4e6eb;
-        }
-
-        /* Judul */
-        h2 { 
-            font-size: 24px; 
-            font-weight: 700; 
-            margin-bottom: 25px; 
-            color: #1c1e21;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        /* Container Tombol Simetris */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px; 
-            width: 100%;
-        }
-        
-        /* Desain Tombol Modern */
-        .btn { 
-            display: block; 
-            width: 100%; 
-            padding: 16px; 
-            font-size: 15px; 
-            border-radius: 12px; 
-            text-decoration: none; 
-            font-weight: 700; 
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: opacity 0.2s ease;
-        }
-        .btn:active { opacity: 0.8; }
-
-        /* Warna Tombol */
-        .install { background-color: #007bff; color: #ffffff; }
-        .addon { background-color: #28a745; color: #ffffff; }
-        .login { background-color: #dc3545; color: #ffffff; }
-
-        /* Kotak Tips Simetris & Kontras Cerah */
-        .tips-box { 
-            margin-top: 25px; 
-            padding: 20px 15px; 
-            background-color: #fff3cd; 
-            border-radius: 12px; 
-            border-left: 4px solid #ffc107;
-            text-align: left; 
-        }
-        .tips-title {
-            font-weight: 700;
-            color: #856404;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-        .tips-list { 
-            padding-left: 18px; 
-            font-size: 13px; 
-            color: #533f03;
-            line-height: 1.6;
-        }
-        .tips-list li { margin-bottom: 8px; }
-        .tips-list li b { color: #000000; }
-
-        /* Footer */
-        .footer {
-            margin-top: 25px;
-            font-size: 11px;
-            color: #90949c;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #121212; color: white; margin: 0; }
+        .container { background: #1e1e1e; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        input { margin-bottom: 20px; width: 100%; }
+        button { background: #ff3e3e; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-size: 16px; font-weight: bold; cursor: pointer; }
+        #status { margin-top: 20px; font-size: 14px; color: #aaa; }
+        .download-btn { display: none; background: #00c853; margin-top: 20px; text-decoration: none; padding: 15px; border-radius: 12px; display: block; color: white; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2>🛠 Master Setup</h2>
-        
-        <div class="btn-container">
-            <a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox" class="btn install">1. Instal Firefox</a>
-            <a href="intent://addons.mozilla.org/en-US/android/addon/cookies-txt/#Intent;scheme=https;package=org.mozilla.firefox;end" class="btn addon">2. Instal Ekstensi cookies.txt</a>
-            <a href="intent://accounts.google.com/ServiceLogin?service=youtube&continue=https://m.youtube.com#Intent;scheme=https;package=org.mozilla.firefox;end" class="btn login">3. Login & Export</a>
-        </div>
-
-        <div class="tips-box">
-            <div class="tips-title">Tips Penggunaan:</div>
-            <ul class="tips-list">
-                <li>Pilih <b>Cancel</b> jika diminta membuka aplikasi YouTube.</li>
-                <li>Setelah Login di Firefox: Klik <b>Titik Tiga</b> di pojok kanan atas.</li>
-                <li>Pilih menu <b>Ekstensi</b> > Klik <b>Export cookies</b>.</li>
-                <li>Klik tombol <b>Copy</b> pada bagian <i>Current Site</i>.</li>
-                <li>Tempelkan (Paste) teks tersebut ke input NCC Clipper Studio.</li>
-            </ul>
-        </div>
-        
-        <div class="footer">Create By Ron's Slim</div>
-    </div>
+<div class="container">
+    <h2>Video Converter Pro</h2>
+    <input type="file" id="upload" accept="video/mp4">
+    <button id="btnConvert" onclick="processVideo()">Convert Video</button>
+    <p id="status">Pilih video, lalu klik Convert</p>
+    <a id="downloadLink" class="download-btn" style="display:none;">Download Video Hasil</a>
+</div>
+<script>
+    const { createFFmpeg, fetchFile } = FFmpeg;
+    const ffmpeg = createFFmpeg({ log: true });
+    async function processVideo() {
+        const fileInput = document.getElementById('upload');
+        const status = document.getElementById('status');
+        const btn = document.getElementById('btnConvert');
+        if (!fileInput.files[0]) return alert("Pilih video!");
+        btn.disabled = true;
+        status.innerText = "Memuat... (Tunggu sebentar)";
+        try {
+            if (!ffmpeg.isLoaded()) await ffmpeg.load();
+            const file = fileInput.files[0];
+            ffmpeg.FS('writeFile', 'input.mp4', await fetchFile(file));
+            status.innerText = "Mengambil thumbnail...";
+            await ffmpeg.run('-ss', '00:00:01', '-i', 'input.mp4', '-vframes', '1', 'thumb.jpg');
+            status.innerText = "Menggabungkan ke video...";
+            await ffmpeg.run('-i', 'input.mp4', '-i', 'thumb.jpg', '-filter_complex', '[0:v][1:v]overlay=0:0:enable=\'between(t,0,0.2)\'', '-c:a', 'copy', 'output.mp4');
+            const data = ffmpeg.FS('readFile', 'output.mp4');
+            const url = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+            const dl = document.getElementById('downloadLink');
+            dl.href = url;
+            dl.download = 'SIAP_UPLOAD_' + file.name;
+            dl.style.display = 'block';
+            status.innerText = "Selesai!";
+        } catch (e) { status.innerText = "Error: " + e.message; } finally { btn.disabled = false; }
+    }
+</script>
 </body>
 </html>
